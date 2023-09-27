@@ -1,21 +1,24 @@
+#!/usr/bin/python3
+"""
+    0-pascal_triangle.py: pascal_triangle()
+"""
+
+
 def pascal_triangle(n):
+    """
+        returns a lis of lists of integers
+        Args:
+            n (int): number of lists and digits
+        Returns: list of lists
+    """
+    t_row = [1]
+    temp_l = [0]
+    pTri = []
+
     if n <= 0:
-        return []
+        return pTri
 
-    triangle = []
     for i in range(n):
-        row = [1]  # The first element in each row is always 1
-        if triangle:
-            prev_row = triangle[-1]
-            for j in range(1, len(prev_row)):
-                row.append(prev_row[j - 1] + prev_row[j])
-            row.append(1)  # The last element in each row is always 1
-        triangle.append(row)
-
-    return triangle
-
-# Example usage:
-n = 5
-result = pascal_triangle(n)
-for row in result:
-    print(row)
+        pTri.append(t_row)
+        t_row = [l+r for l, r in zip(t_row + temp_l, temp_l + t_row)]
+    return pTri
